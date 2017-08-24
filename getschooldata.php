@@ -5,7 +5,7 @@
  * Date: 24/8/17
  * Time: 8:55 AM
  */
-
+header('Content-type:application/json;charset=utf-8');
 
 $servername = "35.197.186.109";
 $username = "root";
@@ -23,7 +23,7 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-        echo json_encode($row);
+        print json_encode($row);
     }
 } else {
     echo "0 result";

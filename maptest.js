@@ -11,7 +11,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 }).addTo(mymap);
 
 //Create markers
-var markers = [
+let markers = [
 	[-37.814, 144.96332],
 	[-37.817, 144.96332],
 	[-37.812, 144.96332]
@@ -20,6 +20,31 @@ var markers = [
 for (var i = 0; i < markers.length; i++){
 	marker = new L.marker([markers[i][0],markers[i][1]]).addTo(mymap);
 }
+
+fetch('getschooldata.php').then(function (response) {
+		console.log(response.json())
+		return response
+    }
+)
+
+function getDatabaseRows()
+{
+    $.getJSON('getschooldata.php', function(data) {
+        console.log(data);
+    });
+}
+
+var xmlhttp = new XMLHttpRequest();
+
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var myObj = this.responseText;
+        document.getElementById("demo").innerHTML = myObj[2];
+    }
+};
+xmlhttp.open("GET", "getschooldata.php", true);
+xmlhttp.send();
+
 
 // var googleLayer = new L.Google('ROADMAP');
 //     mymap.addLayer(googleLayer);
